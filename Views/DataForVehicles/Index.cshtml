@@ -1,0 +1,71 @@
+﻿@model IEnumerable<VoziloKT.Models.DataForVehicles>
+
+@{
+    ViewData["Title"] = "Vehicles";
+}
+<!-- This view is used to display and manipulate data from the list of vehicles -->
+<h1>Vehicles</h1>
+
+<p>
+    <a asp-action="Create">Add New Vehicle</a>
+</p>
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            <!-- This paragraph is used to filter the list by vehicle model, passes value "currentFilter" to Index method in DataForVehicles controller-->
+            Find by model: <input type="text" name="filterByModel" value="@ViewData["currentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-secondary" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+<!-- This table shows the list of vehicles, whole or filtered -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LicensePlateNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vin)
+            </th>
+            <th>
+                <!-- This paragraph is used to sort the list by vehicle model, passes value "ModelSortParm" (which can be null or "model_desc") to Index method in DataForVehicles controller-->
+                <a asp-action="Index" asp-route-sortByModel="@ViewData["ModelSortParm"]"> @Html.DisplayNameFor(model => model.VehicleModelNavigation)</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LicensePlateNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VehicleModelNavigation.VehicleModel)
+                </td>
+                <td>
+                    <!-- This <td> element has the Edit,Details and Delete options which use the corresponding method in DataForVehicles controller -->
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Opens new tab for printing the whole list of vehicles using the Print method in DataForVehicles controller-->
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="button" value="Print" onclick="window.open('https://localhost:44381/DataForVehicles/print')" class="btn btn-primary" />
+    </div>
+</div>
+
+
+

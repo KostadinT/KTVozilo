@@ -1,0 +1,36 @@
+﻿@model VoziloKT.Models.DataForVehicles
+
+@{
+    ViewData["Title"] = "Details";
+}
+<!-- This view is to display details of a vehicle using the Details method in DataForVehicles conroller-->
+<h1>Details</h1>
+
+<div>
+    <h4>Data For Vehicles</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LicensePlateNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LicensePlateNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Vin)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Vin)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.VehicleModelNavigation)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.VehicleModelNavigation.VehicleModel)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,24 @@
+﻿@model VoziloKT.Models.MarkaNaVozilo
+
+@{
+    ViewData["Title"] = "Details";
+}
+<!-- This view is to display details of a vehicle model using the Details method in MarkaNaVoziloes conroller-->
+<h1>Details</h1>
+
+<div>
+    <h4>Vehicle Model</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.VehicleModel)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.VehicleModel)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

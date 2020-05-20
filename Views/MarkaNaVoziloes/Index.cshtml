@@ -1,0 +1,51 @@
+﻿@model IEnumerable<VoziloKT.Models.MarkaNaVozilo>
+
+
+@{
+    ViewData["Title"] = "Vehicle Models";
+}
+<!-- This view is used to display and manipulate data from the list of vehicle models -->
+<h1>Vehicle Models</h1>
+
+<p>
+    <a asp-action="Create">Add New Vehicle Model</a>
+</p>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            <!-- This paragraph is used to filter the list by vehicle model, passes value "currentFilter" to Index method in MarkaNaVoziloes controller-->
+            Find by model: <input type="text" name="filterByModel" value="@ViewData["currentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-secondary" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+<!-- This table shows the list of vehicle models -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <!-- This paragraph is used to sort the list by vehicle model, passes value "ModelSortParm" (which can be null or "model_desc") to Index method in MarkaNaVoziloes controller-->
+                <a asp-action="Index" asp-route-sortByModel="@ViewData["ModelSortParm"]"> @Html.DisplayNameFor(model => model.VehicleModel)</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VehicleModel)
+                </td>
+                <td>
+                    <!-- This <td> element has the Edit,Details and Delete options which use the corresponding method in MarkaNaVoziloes controller -->
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<VoziloKT.Models.DataForVehicles>
+
+@{
+    
+    Layout = null;
+}
+<!-- This view is to print the whole list of vehicles-->
+<h1>Vehicles</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LicensePlateNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VehicleModelNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LicensePlateNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VehicleModelNavigation.VehicleModel)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- After printing the print tab closes-->
+<script type="text/javascript">
+    setTimeout(function () { window.print(); }, 500);
+    window.onfocus = function () { setTimeout(function () { window.close(); }, 500); }
+</script>
